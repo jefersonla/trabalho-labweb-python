@@ -1,0 +1,60 @@
+{% extends 'base/layout.html' %}
+
+{% block title %} Bicicletas Consulta {% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+{% block content %}
+
+	<h1> Consulta de Bicicletas </h1>
+	<h4> Insira o nome, id, modelo, fabricante, cor ou e-mail para iniciar a pesquisa </h4>
+
+	<hr></hr> <!-- ./Divisão -->
+
+	<div class="row" style="margin-bottom:20px;">
+		<form id="formulario" action="{%url 'consulta' %}" method="post">
+			<!-- Required by Django -->
+			{% csrf_token %}
+
+			<div class="col-md-offset-3 col-md-6">
+				<div class="input-group">
+					<input type="text" class="form-control" name="procurar_por" placeholder="Procurar por nome, id, modelo, fabricante, cor ou e-mail ...">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="submit">Pesquisar</button>
+					</span>
+				</div>
+			</div>
+		</form>
+	</div>
+
+	<table class="table table-bordered table-responsive">
+		<thead>
+			<tr>
+				<td>Id</td>
+				<td>Bicicleta</td>
+				<td>Proprietario</td>
+				<td>Email</td>
+				<td>Ação</td>
+			</tr>
+		</thead>
+		<tbody>
+			{% for item in itens %}
+				<tr>
+					<td>{{ item.id }}</td>
+					<td>{{ item.modelo }}</td>
+					<td>{{ item.proprietario }}</td>
+					<td>{{ item.email}}</td>
+					<td>
+						<a href="{% url 'editar' item.id %}"><button class="btn btn-success">Editar</button></a>
+						<a href="{% url 'excluir' item.id %}" onclick="return confirm('Deseja Excluir?')"><button class="btn btn-danger">Excluir!</button></a>
+					</td>
+				</tr>
+			{% endfor %}
+		</tbody>
+	</table>
+
+{% endblock %}
+
+{% block extra_body %}
+{% endblock %}

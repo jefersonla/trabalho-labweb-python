@@ -1,0 +1,153 @@
+{% extends 'base/layout.html' %}
+
+{% block title %} Bicicletas Cadastro {% endblock %}
+
+{% block extra_head %}
+{% endblock %}
+
+<!--
+OK - Fabricante * 			nomeFabricanteBicicletaInput
+OK - Modelo * 				modeloBicicletaInput
+OK - Cor * 					corBicicletaInput
+OK - Marcha (sim ou não) 	possuiMarcha
+OK - Marca do Cambio 		marcaCambioInput
+OK - Proprietário * 		nomeProprietarioInput
+OK - Celular * 				celularProprietarioInput
+OK - e-mail 				emailProprietarioInput
+-->
+
+{% block content %}
+
+	<h1> Cadastro de Bicicletas </h1>
+	<h4> Complete o formulário a seguir para incluir uma bicicleta ao biciletário </h4>
+
+	<hr></hr> <!-- ./Divisão -->
+
+	<form oninput="validarForm()" class="row" id="formulario" action="{%url 'cadastrar' %}" method="post"> <!-- Formulario -->
+
+		<!-- Required by Django -->
+		{% csrf_token %}
+
+		<!-- ID input -->
+		<input type="hidden" name="id" value="{{ item.id }}">
+
+		<div class="row" style="margin: 0 10px auto"> <!-- Dados Bicicleta -->
+			<div class="col-md-4 col-md-offset-4">
+				<h2> Dados da Bicicleta e Proprietário </h2>
+				
+				<hr></hr> <!-- ./Divisão -->
+
+				<div class="form-group has-feedback has-nothing"> <!-- Fabricante Bicicleta -->
+					<label class="control-label" for="nomeFabricanteBicicletaInput"> Fabricante Bicicleta </label>
+					<input name="fabricante" id="nomeFabricanteBicicletaInput" class="form-control" type="text" required="" placeholder="Insira o nome do fabricante da bicicleta" value="{{ item.fabricante }}"></input>
+				 	
+				 	<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./Fabricante Bicicleta -->
+
+				<div class="form-group has-feedback has-nothing"> <!-- Modelo Bicicleta -->
+					<label class="control-label" for="modeloBicicletaInput"> Modelo Bicicleta </label>
+					<input name="modelo" id="modeloBicicletaInput" class="form-control" type="text" required="" placeholder="Insira o nome do modelo da bicicleta" value="{{ item.modelo }}"></input>
+				 	
+				 	<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./Modelo Bicicleta -->
+				
+				<div class="form-group has-feedback has-nothing"> <!-- Cor Bicicleta -->
+					<label class="control-label" for="corBicicletaInput"> Cor Bicicleta </label>
+					<input name="cor" id="corBicicletaInput" class="form-control" type="text" required="" placeholder="Insira a car da bicicleta" value="{{ item.cor }}"></input>
+				 	
+				 	<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./Cor Bicicleta -->
+				
+
+				<div class="form-group has-feedback has-nothing"> <!-- Possui Marcha -->
+					<label for="possuiMarcha"> Possui Marchas: </label>
+
+					<div class="radio"> <!-- Poussi Marcha SIM -->
+						<label>
+							<input type="radio" name="possuiMarcha" id="possuiMarchaSim" value="sim" checked=""> Sim
+						</label>
+					</div> <!-- ./Poussi Marcha SIM -->
+
+					<div class="radio"> <!-- Poussi Marcha NAO -->
+						<label>
+							<input type="radio" name="possuiMarcha" id="possuiMarchaNao" value="nao" > Não
+						</label>
+					</div> <!-- ./Poussi Marcha NAO -->
+
+					<!-- Select data based on ID -->
+					<script type="text/javascript">
+						console.log('aff = {{ item.marcha }}');
+						if('{{ item.marcha }}' !== ''){
+							console.log('{{ item.marcha }}')
+							if('{{item.marcha}}' === 'sim'){
+								document.getElementById('possuiMarchaSim').checked = true
+							} else {
+								document.getElementById('possuiMarchaNao').checked = true
+							}
+						}
+					</script>
+				</div> <!-- ./Possui Marcha --> 
+
+				<div class="form-group has-feedback has-nothing"> <!-- Marca Cambio -->
+					<label class="control-label" for="marcaCambioInput"> Marca Cambio </label>
+					<input name="marca_cambio" id="marcaCambioInput" class="form-control" type="text" placeholder="Insira a marca do cambio da bicicleta" value="{{ item.marca_cambio }}"></input>
+					
+					<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./Marca Cambio -->
+
+				<div class="form-group has-feedback has-nothing"> <!-- Nome Proprietario -->
+					<label class="control-label" for="nomeProprietarioInput"> Proprietario </label>
+					<input name="proprietario" id="nomeProprietarioInput" class="form-control" type="text" required="" placeholder="Insira o nome do proprietario" value="{{ item.proprietario }}"></input>
+					
+					<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./Nome Proprietario -->
+				
+				<div class="form-group has-feedback has-nothing"> <!-- Celular Proprietario -->
+					<label class="control-label" for="celularProprietarioInput"> Celular Proprietario </label>
+					<input name="celular" id="celularProprietarioInput" class="form-control" type="text" required="" placeholder="Insira o número de celular do proprietario" value="{{ item.celular }}"></input>
+					
+					<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./Celular Proprietario -->	
+
+				<div class="form-group has-feedback has-nothing"> <!-- E-mail proprietario -->
+					<label class="control-label" for="emailProprietarioInput"> E-mail proprietario </label>
+					<input name="email" id="emailProprietarioInput" class="form-control" type="email" placeholder="Insira o e-mail do proprietario" value="{{ item.email }}"></input>
+					
+					<!-- Icons -->
+				 	<span class="glyphicon glyphicon-ok form-control-feedback" aria-hidden="true"></span>
+					<span class="glyphicon glyphicon-remove form-control-feedback" aria-hidden="true"></span>
+					<!-- ./Icons -->
+				</div> <!-- ./E-mail proprietario -->	
+			</div> 
+		</div> <!-- ./Dados Bicicleta -->
+
+		<hr></hr> <!-- ./Divisão -->
+
+		<button type="submit" id="botaoValidacao" value="submit" class="btn btn-primary col-md-4 col-md-offset-4" onsubmit="validarForm() ? '' : alert('Formulário Contém Erros!'); validarForm();"> - Nao Checado - </button>
+
+	</form> <!-- ./Formulario -->
+
+{% endblock %}
+
+{% block extra_body %}
+	<!-- Application Code -->
+	<script type="text/javascript" src="/static/scripts/app.js"></script>
+{% endblock %}

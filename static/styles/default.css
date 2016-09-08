@@ -1,0 +1,41 @@
+/* CSS Reset */
+html{
+	height: 100%;
+}
+
+form{
+	text-align: center;
+}
+
+/* Estilo de Página */
+.form-group, .checkbox{
+	text-align:left;
+}
+
+#formulario{
+	margin-bottom: 30px;
+}
+
+/* Icones do formulário */
+/* Não mostrar enquanto o formulário não tiver sido validado */
+.has-nothing .glyphicon{
+	display: none;
+}
+
+/* Mostrar quando o input for validado com sucesso */
+.has-success .glyphicon-ok{
+	display: inherit;
+}
+
+.has-success .glyphicon-remove{
+	display: none;
+}
+
+/* Mostrar quando o input não for validado */
+.has-error .glyphicon-ok{
+	display: none;
+}
+
+.has-error .glyphicon-remove{
+	display: inherit;
+}
